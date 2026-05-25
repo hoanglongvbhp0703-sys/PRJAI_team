@@ -1,0 +1,388 @@
+/* ============================================================
+   style.css – CleanerBot UI Stylesheet
+   Bố cục: Sidebar bên trái (tối) + Main area bên phải (sáng)
+   ============================================================ */
+
+/* ---- Reset & base ---- */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  background: #1a1a2e;
+  color: #e0e0e0;
+  height: 100vh;
+  overflow: hidden; /* Tránh scroll của body; scroll nằm trong từng vùng */
+}
+
+/* ---- Layout: app shell ---- */
+
+/* #app chia đôi màn hình: sidebar trái + main phải */
+#app {
+  display: flex;
+  height: 100vh;
+}
+
+/* ---- Sidebar ---- */
+
+#sidebar {
+  width: 280px;
+  min-width: 220px;
+  background: #16213e;        /* Nền tối xanh navy */
+  border-right: 1px solid #0f3460;
+  overflow-y: auto;           /* Cho phép scroll nếu sidebar quá cao */
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;             /* Không co lại khi main area hẹp */
+}
+
+/* ---- Panel (mỗi section trong sidebar) ---- */
+
+.panel {
+  padding: 12px 14px;
+  border-bottom: 1px solid #0f3460;
+}
+
+/* Tiêu đề panel: chữ nhỏ hoa, màu xanh sáng */
+.panel h2 {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #4a9eda;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+/* ---- Controls panel: inputs và labels ---- */
+
+/* Mỗi label + input thành 1 hàng, label trái - input phải */
+#panel-controls label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  color: #ccc;
+  margin-bottom: 7px;
+  gap: 6px;
+}
+
+/* Input number và select dùng chung style */
+#panel-controls input[type="number"],
+#panel-controls select {
+  width: 88px;
+  padding: 4px 6px;
+  background: #0f3460;
+  border: 1px solid #2d5a8e;
+  border-radius: 4px;
+  color: #e0e0e0;
+  font-size: 0.82rem;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+#panel-controls input[type="number"]:focus,
+#panel-controls select:focus {
+  border-color: #4a9eda;
+}
+
+/* Nhóm 2 nút Generate / Reset */
+.btn-group {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.btn-group button {
+  flex: 1; /* Hai nút chia đều chiều ngang */
+}
+
+/* ---- Nút bấm chung ---- */
+
+button {
+  cursor: pointer;
+  padding: 6px 12px;
+  border: 1px solid #2d5a8e;
+  border-radius: 4px;
+  background: #0f3460;
+  color: #e0e0e0;
+  font-size: 0.82rem;
+  transition: background 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+
+button:hover:not(:disabled) {
+  background: #4a9eda;
+  border-color: #4a9eda;
+  color: #fff;
+}
+
+/* Nút bị disable: mờ đi và không cho click */
+button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* ---- Map Editor panel ---- */
+
+/* Danh sách radio tools: mỗi tool 1 dòng */
+#editor-tools {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+#editor-tools label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.82rem;
+  color: #ccc;
+  cursor: pointer;
+  padding: 2px 0;
+}
+
+#editor-tools label:hover {
+  color: #fff;
+}
+
+/* Thông tin Inspect hiển thị khi click ô */
+#inspect-info {
+  margin-top: 9px;
+  font-size: 0.78rem;
+  color: #88aacc;
+  min-height: 36px;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+/* ---- Action panel và Stats panel ---- */
+
+/* Mỗi dòng: label trái – value phải */
+#panel-action p,
+#panel-stats p {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-size: 0.82rem;
+  color: #aaa;
+  margin-bottom: 5px;
+  gap: 6px;
+}
+
+/* Giá trị (span): màu xanh, bold, căn phải, có thể wrap */
+#panel-action span,
+#panel-stats span {
+  font-weight: 600;
+  color: #4a9eda;
+  text-align: right;
+  max-width: 155px;
+  word-break: break-word;
+  font-size: 0.78rem;
+}
+
+/* ---- Khu vực chính (main area) ---- */
+
+#main-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #f0f4f8;     /* Nền sáng để grid nổi bật */
+  color: #1a1a2e;
+  overflow: hidden;
+  min-width: 0;            /* Quan trọng: tránh main area tràn ra khỏi flex */
+}
+
+/* ---- Thanh điều khiển simulator ---- */
+
+#simulator-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: #e2e8f0;
+  border-bottom: 1px solid #cbd5e1;
+  flex-shrink: 0;
+  flex-wrap: wrap;          /* Cho phép wrap trên màn hình nhỏ */
+}
+
+/* Override nút trong simulator-controls: dùng màu sáng hơn */
+#simulator-controls button {
+  background: #fff;
+  border-color: #94a3b8;
+  color: #1a1a2e;
+}
+
+#simulator-controls button:hover:not(:disabled) {
+  background: #3b82f6;
+  border-color: #3b82f6;
+  color: #fff;
+}
+
+/* Nhóm nút Speed: đẩy sang phải */
+.speed-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;       /* Đẩy sang cạnh phải */
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+/* ---- Nút Speed ---- */
+
+.btn-speed {
+  padding: 4px 10px;
+  font-size: 0.78rem;
+  background: #fff;
+  border-color: #94a3b8;
+  color: #1a1a2e;
+}
+
+/* Nút speed đang được chọn */
+.btn-speed.active {
+  background: #3b82f6;
+  border-color: #3b82f6;
+  color: #fff;
+}
+
+.btn-speed:hover:not(:disabled):not(.active) {
+  background: #e0e7ff;
+  border-color: #6366f1;
+  color: #1a1a2e;
+}
+
+/* ---- Grid container ---- */
+
+#grid-container {
+  flex: 1;
+  display: grid;
+  /* grid-template-columns được set động bởi render.js */
+  gap: 2px;
+  padding: 16px;
+  overflow: auto;           /* Scroll nếu map lớn hơn vùng hiển thị */
+  align-content: start;     /* Ô căn lên trên thay vì dãn ra toàn vùng */
+  justify-content: start;   /* Ô căn trái thay vì dãn ra */
+}
+
+/* ---- Grid cell ---- */
+
+:root {
+  --cell-size: 48px; /* Kích thước mỗi ô, có thể thay đổi tại đây */
+}
+
+.cell {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  background: #e2e8f0;       /* Màu nền mặc định của ô trống */
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  position: relative;        /* Cần để các icon absolute được định vị bên trong */
+  cursor: pointer;
+  transition: background 0.1s, border-color 0.1s;
+  overflow: hidden;
+}
+
+/* Hover: làm sáng ô lên */
+.cell:hover {
+  background: #bfdbfe;
+  border-color: #93c5fd;
+}
+
+/* Các icon trong ô: tuyệt đối, lấp đầy ô */
+.cell img {
+  position: absolute;
+  inset: 0;               /* = top:0; right:0; bottom:0; left:0 */
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;   /* Không chặn click vào ô phía dưới */
+}
+
+/* Khi có nhiều icon: icon sau (DOM order) sẽ nằm trên icon trước */
+/* z-index tăng dần theo thứ tự DOM nhờ stacking context */
+.cell img:nth-child(2) { z-index: 1; }
+.cell img:nth-child(3) { z-index: 2; }
+.cell img:nth-child(4) { z-index: 3; }
+.cell img:nth-child(5) { z-index: 4; }
+
+/* ---- Cell states (tô màu nền theo loại ô) ---- */
+
+/* Chướng ngại vật: xám đậm */
+.cell--obstacle {
+  background: #64748b;
+  border-color: #475569;
+}
+.cell--obstacle:hover {
+  background: #7a8fa3;
+}
+
+/* Trạm sạc: xanh lá nhạt */
+.cell--charger {
+  background: #d1fae5;
+  border-color: #6ee7b7;
+}
+
+/* Thùng rác: đỏ nhạt */
+.cell--trash-can {
+  background: #fee2e2;
+  border-color: #fca5a5;
+}
+
+/* Ô có rác: vàng nhạt */
+.cell--trash {
+  background: #fef9c3;
+  border-color: #fde68a;
+}
+
+/* Ô robot đang đứng: border xanh dương đậm */
+.cell--robot {
+  border: 2px solid #3b82f6;
+  box-shadow: 0 0 0 1px #93c5fd;
+}
+
+/* Kết hợp: robot đứng trên rác */
+.cell--robot.cell--trash {
+  background: #fef9c3;
+}
+
+/* Kết hợp: robot đứng trên trạm sạc */
+.cell--robot.cell--charger {
+  background: #d1fae5;
+}
+
+/* ---- Responsive: màn hình nhỏ hơn 700px ---- */
+
+@media (max-width: 700px) {
+  /* Chuyển layout từ hàng ngang sang cột dọc */
+  #app {
+    flex-direction: column;
+  }
+
+  /* Sidebar chiếm tối đa 40% chiều cao */
+  #sidebar {
+    width: 100%;
+    min-width: unset;
+    max-height: 40vh;
+  }
+
+  /* Thu nhỏ ô grid khi màn hình nhỏ */
+  :root {
+    --cell-size: 36px;
+  }
+
+  /* Simulator controls có thể wrap */
+  #simulator-controls {
+    gap: 4px;
+    padding: 6px 10px;
+  }
+
+  .speed-group {
+    margin-left: 0;
+    flex-wrap: wrap;
+  }
+}

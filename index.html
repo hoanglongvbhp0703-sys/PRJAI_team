@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CleanerBot – Robot Hút Bụi</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="app">
+
+      <!-- ===== SIDEBAR TRÁI ===== -->
+      <aside id="sidebar">
+
+        <!-- Panel: Controls -->
+        <section class="panel" id="panel-controls">
+          <h2>Controls</h2>
+
+          <label>Map width
+            <input type="number" id="input-width" min="2" max="30" value="10" />
+          </label>
+
+          <label>Map height
+            <input type="number" id="input-height" min="2" max="30" value="10" />
+          </label>
+
+          <label>Trash
+            <input type="number" id="input-trash" min="0" value="5" />
+          </label>
+
+          <label>Obstacles
+            <input type="number" id="input-obstacles" min="0" value="5" />
+          </label>
+
+          <label>Max capacity
+            <input type="number" id="input-max-capacity" min="1" value="3" />
+          </label>
+
+          <label>Battery loss (% / step)
+            <input type="number" id="input-battery-loss" min="0" max="100" step="0.1" value="1" />
+          </label>
+
+          <label>Algorithm
+            <select id="select-algorithm"></select>
+          </label>
+
+          <div class="btn-group">
+            <button id="btn-generate">Generate map</button>
+            <button id="btn-reset">Reset map</button>
+          </div>
+        </section>
+
+        <!-- Panel: Map Editor -->
+        <section class="panel" id="panel-editor">
+          <h2>Map Editor</h2>
+
+          <div id="editor-tools">
+            <label><input type="radio" name="editor-tool" value="inspect" checked /> Inspect</label>
+            <label><input type="radio" name="editor-tool" value="empty" /> Empty</label>
+            <label><input type="radio" name="editor-tool" value="trash" /> Trash</label>
+            <label><input type="radio" name="editor-tool" value="obstacle" /> Obstacle</label>
+            <label><input type="radio" name="editor-tool" value="charging-station" /> Charging station</label>
+            <label><input type="radio" name="editor-tool" value="trash-can" /> Trash can</label>
+            <label><input type="radio" name="editor-tool" value="robot-start" /> Robot start</label>
+          </div>
+
+          <div id="inspect-info"></div>
+        </section>
+
+        <!-- Panel: Action -->
+        <section class="panel" id="panel-action">
+          <h2>Action</h2>
+          <p>Latest action: <span id="stat-latest-action">–</span></p>
+          <p>Next action: <span id="stat-next-action">–</span></p>
+        </section>
+
+        <!-- Panel: Stats -->
+        <section class="panel" id="panel-stats">
+          <h2>Stats</h2>
+          <p>Steps: <span id="stat-steps">–</span></p>
+          <p>Battery: <span id="stat-battery">–</span></p>
+          <p>Capacity: <span id="stat-capacity">–</span></p>
+          <p>Status: <span id="stat-status">–</span></p>
+          <p>Pathfinding time: <span id="stat-calc-time">–</span></p>
+        </section>
+
+      </aside>
+
+      <!-- ===== KHU VỰC CHÍNH ===== -->
+      <main id="main-area">
+
+        <!-- Điều khiển simulator -->
+        <div id="simulator-controls">
+          <button id="btn-prev">&#9664; Previous Step</button>
+          <button id="btn-next">Next Step &#9654;</button>
+          <button id="btn-run">&#9654;&#9654; Run</button>
+          <button id="btn-stop" disabled>&#9646;&#9646; Stop</button>
+          <span class="speed-group">
+            Speed:
+            <button class="btn-speed active" data-speed="1">1x</button>
+            <button class="btn-speed" data-speed="2">2x</button>
+            <button class="btn-speed" data-speed="3">3x</button>
+            <button class="btn-speed" data-speed="5">5x</button>
+          </span>
+        </div>
+
+        <!-- Grid map -->
+        <div id="grid-container">
+          <!-- render.js sẽ tạo các ô grid động vào đây -->
+        </div>
+
+      </main>
+
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>

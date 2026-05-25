@@ -1,0 +1,11 @@
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor temp
+*.swp
+*~
+
+# Claude Code config (cá nhân, không commit lên team)
+.claude/

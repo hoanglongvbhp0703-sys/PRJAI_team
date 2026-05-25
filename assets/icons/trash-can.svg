@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Trash can placeholder -->
+  <rect x="16" y="24" width="32" height="34" rx="3" ry="3" fill="#E74C3C" stroke="#B03A2E" stroke-width="2"/>
+  <rect x="12" y="18" width="40" height="8" rx="3" ry="3" fill="#C0392B" stroke="#922B21" stroke-width="2"/>
+  <rect x="24" y="10" width="16" height="10" rx="3" ry="3" fill="#C0392B" stroke="#922B21" stroke-width="2"/>
+  <line x1="26" y1="30" x2="26" y2="52" stroke="#922B21" stroke-width="2" stroke-linecap="round"/>
+  <line x1="32" y1="30" x2="32" y2="52" stroke="#922B21" stroke-width="2" stroke-linecap="round"/>
+  <line x1="38" y1="30" x2="38" y2="52" stroke="#922B21" stroke-width="2" stroke-linecap="round"/>
+</svg>
